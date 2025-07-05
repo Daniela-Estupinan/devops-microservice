@@ -1,0 +1,6 @@
+flask==2.3.3
+pyjwt==2.8.0
+pytest
+coverage
+flake8
+bandit
