@@ -5,3 +5,5 @@ coverage
 flake8
 bandit
 python-dotenv
+pytest
+pytest-cov
