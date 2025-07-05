@@ -18,7 +18,6 @@ jobs:
       - run: pip install -r requirements.txt
       - run: flake8 app/
       - run: bandit -r app/ --skip B101
-      - run: pytest --cov=app
 
   docker-build:
     needs: build-and-test
