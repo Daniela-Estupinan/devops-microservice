@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Agrega la raíz del proyecto al path para poder importar app
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 from app.main import app
 from app.auth import generate_jwt
 
