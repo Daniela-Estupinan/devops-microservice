@@ -1,8 +1,28 @@
-data = request.get_json()
-if not validate_request_data(data, ['to', 'message', 'from', 'timeToLifeSec']):
-    logger.error("Bad request - missing fields.")
-    return "ERROR", 400
+import datetime
+import logging
 
-to = data['to']
-logger.info(f"Message received for {to}")
-return jsonify({"message": f"Hello {to} your message will be send"})
+
+def init_logger(name="devops"):
+    logger = logging.getLogger(name)
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        formatter = logging.Formatter(
+            '[%(asctime)s] %(levelname)s in %(module)s: %(message)s'
+        )
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.setLevel(logging.INFO)
+    return logger
+
+
+def validate_request_data(data, required_fields):
+    if not isinstance(data, dict):
+        return False
+    for field in required_fields:
+        if field not in data:
+            return False
+    return True
+
+
+def current_timestamp():
+    return datetime.datetime.utcnow().isoformat() + "Z"

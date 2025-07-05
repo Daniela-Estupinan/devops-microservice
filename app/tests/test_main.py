@@ -1,4 +1,3 @@
-import pytest
 from app.main import app
 from app.auth import generate_jwt
 
@@ -9,6 +8,7 @@ headers = {
     "Content-Type": "application/json"
 }
 
+
 def test_valid_post():
     response = client.post("/DevOps", json={
         "message": "This is a test",
@@ -18,6 +18,7 @@ def test_valid_post():
     }, headers=headers)
     assert response.status_code == 200
     assert "Juan Perez" in response.get_json()["message"]
+
 
 def test_invalid_method():
     response = client.get("/DevOps")
