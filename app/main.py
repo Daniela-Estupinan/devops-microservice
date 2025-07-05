@@ -1,4 +1,4 @@
-rom flask import Flask, request, jsonify
+from flask import Flask, request, jsonify
 from auth import check_api_key, check_jwt
 from utils import validate_request_data, init_logger
 
