@@ -13,13 +13,15 @@ def devops():
         return "ERROR", 403
 
     data = request.get_json()
-    if not validate_request_data(data, ['to', 'message', 'from', 'timeToLifeSec']):
+    required_fields = ['to', 'message', 'from', 'timeToLifeSec']
+    if not validate_request_data(data, required_fields):
         logger.error("Bad request - missing fields.")
         return "ERROR", 400
 
     to = data['to']
     logger.info(f"Message received for {to}")
-    return jsonify({"message": f"Hello {to} your message will be send"})
+    message = f"Hello {to} your message will be send"
+    return jsonify({"message": message})
 
 
 @app.errorhandler(405)
