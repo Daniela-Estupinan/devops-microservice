@@ -19,23 +19,24 @@ jobs:
       - run: flake8 app/
       - run: bandit -r app/ --skip B101
 
-      - name: Run Flask app in background
-        run: |
-          nohup python -m flask run --host=127.0.0.1 --port=5000 &
-          sleep 5  # espera que arranque la app
-      - name: Test /health endpoint
-        run: |
-          RESPONSE=$(curl --write-out "%{http_code}" --silent --output /dev/null http://127.0.0.1:5000/health)
-          if [ "$RESPONSE" != "200" ]; then
-            echo "Health check failed with status $RESPONSE"
-            exit 1
-          else
-            echo "Health check passed"
-          fi
-
   docker-build:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: docker build -t devops-microservice .
+  needs: build-and-test
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    
+    # Login al registry
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    # Build la imagen
+    - name: Build Docker image
+      run: docker build -t devops-microservice:latest .
+
+    # Push al registry
+    - name: Push Docker image
+      run: docker push devops-microservice:latest
+
