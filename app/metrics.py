@@ -13,4 +13,3 @@ devops_uptime_seconds {uptime}
 """,
         mimetype="text/plain"
     )
-
