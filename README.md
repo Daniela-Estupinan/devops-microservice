@@ -22,3 +22,10 @@ curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"message": "This is a test", "to": "Juan Perez", "from": "Rita Asturia", "timeToLifeSec": 45}' \
   https://<HOST>/DevOps
+
+## DOCKERHUB 
+
+https://hub.docker.com/repository/docker/daniela1411/devops-microservice/general
+
+
+
