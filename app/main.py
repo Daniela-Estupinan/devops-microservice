@@ -24,6 +24,10 @@ def devops():
     return jsonify({"message": message})
 
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return "OK", 200
+
 @app.errorhandler(405)
 def method_not_allowed(e):
     return "ERROR", 405

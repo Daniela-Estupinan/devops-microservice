@@ -24,3 +24,9 @@ def test_invalid_method():
     response = client.get("/DevOps")
     assert response.status_code == 405
     assert response.data == b"ERROR"
+
+
+def test_health_check():
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.data == b"OK"
