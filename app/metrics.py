@@ -3,6 +3,7 @@ import time
 
 start_time = time.time()
 
+
 def metrics():
     uptime = int(time.time() - start_time)
     return Response(
